@@ -23,7 +23,7 @@ clock = pygame.time.Clock()
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Flappy Bird")
 
-back_img = pygame.image.load("background1.png").convert()
+back_img = pygame.image.load("background2.png").convert()
 
 bg_width = back_img.get_width()
 bg_rect = back_img.get_rect()
@@ -32,13 +32,13 @@ tiles2 = math.ceil(width / bg_width) + 1
 scroll1 = 0
 scroll2 = 0
 
-bird_img = pygame.image.load("bird1.png")
+bird_img = pygame.image.load("bird2.png")
 bird_flap = pygame.USEREVENT
 bird_rect = bird_img.get_rect(center=(53, 100))
 bird_movement = 0
 gravity = 0.17
 
-pipe_img = pygame.image.load("pipe1.png")
+pipe_img = pygame.image.load("pipe2.png")
 pipe_height = [400, 350, 533, 490, 367]
 
 pipes = []
@@ -46,7 +46,7 @@ create_pipe = pygame.USEREVENT
 pygame.time.set_timer(create_pipe, 1200)
 
 game_over = False
-over_img = pygame.image.load("fon1.png").convert_alpha()
+over_img = pygame.image.load("fon2.png").convert_alpha()
 over_rect = over_img.get_rect(center=(width // 2, height // 2))
 
 
