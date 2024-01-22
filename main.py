@@ -119,7 +119,7 @@ def start_screen():
                   'Нажмите  "ПРОБЕЛ"  чтобы начать игру'
                   ]
 
-    fon = pygame.transform.scale(load_image('fon1.png'), (width, height))
+    fon = pygame.transform.scale(load_image('fon2.png'), (width, height))
     screen.blit(fon, (0, 0))
     font = pygame.font.SysFont('comicsansms', 22, True, False)
     text_coord = 50
