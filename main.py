@@ -169,6 +169,30 @@ def pipe_animation():
             game_over = True
 
 
+def draw_score(game_state):
+    menu_font = pygame.font.SysFont('comicsansms', 22, True, False)
+    if game_state == "game_on":
+        screen.blit(render(f'Score: {str(score)}', score_font), (250, 25))
+    elif game_state == "game_over":
+        screen.blit(render(f'High Score: {str(high_score)}', score_font), (210, 65))
+        screen.blit(render(f'    Press "SPACE" to start the game', menu_font), (65, 400))
+        screen.blit(render(f'Нажмите "ПРОБЕЛ" чтобы начать игру', menu_font), (65, 450))
+
+
+def score_update():
+    global score, score_time, high_score
+    if pipes:
+        for pipe in pipes:
+            if 65 < pipe.centerx < 69 and score_time:
+                score += 1
+                score_time = False
+            if pipe.left <= 0:
+                score_time = True
+
+    if score > high_score:
+        high_score = score
+
+
 start_screen()
 running = True
 while running:
