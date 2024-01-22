@@ -203,6 +203,58 @@ while running:
             running = False
             sys.exit()
 
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE and not game_over:
+                bird_movement = -5
+
+            if event.key == pygame.K_SPACE and game_over:
+                game_over = False
+                bird_rect = bird_img.get_rect(center=(53, 100))
+                pipes = []
+                bird_movement = 0
+                score = 0
+
+        if event.type == bird_flap:
+            bird_rect = bird_img.get_rect(center=bird_rect.center)
+
+        if event.type == create_pipe:
+            pipes.extend(create_pipes())
+
+    for i in range(0, tiles2):
+        screen.blit(back_img, (i * bg_width + scroll2, 0))
+        bg_rect.x = i * bg_width + scroll2
+
+    # for i in range(0, tiles1):
+    #     screen.blit(floor_img, (i * fl_width + scroll1, 550))
+    #     fl_rect.x = i * fl_width + scroll1
+
+    scroll1 -= 5
+    scroll2 -= 2
+
+    if abs(scroll2) > bg_width:
+        scroll2 = 0
+    # if abs(scroll1) > fl_width:
+    #     scroll1 = 0
+
+    if not game_over:
+        bird_movement += gravity
+        bird_rect.centery += bird_movement
+        rotated_bird = pygame.transform.rotozoom(bird_img, bird_movement * -6, 1)
+
+        if bird_rect.top < 5 or bird_rect.bottom >= 550:
+            game_over = True
+
+        screen.blit(rotated_bird, bird_rect)
+        score_update()
+        pipe_animation()
+        fon.play()
+        draw_score("game_on")
+
+    elif game_over:
+        fon.stop()
+        screen.blit(over_img, over_rect)
+        draw_score("game_over")
+
     pygame.display.update()
 pygame.quit()
 sys.exit()
