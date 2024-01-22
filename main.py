@@ -145,6 +145,30 @@ def start_screen():
         clock.tick(FPS)
 
 
+def create_pipes():
+    pipe_y = random.choice(pipe_height)
+    top_pipe = pipe_img.get_rect(midbottom=(550, pipe_y - 190))
+    bottom_pipe = pipe_img.get_rect(midtop=(550, pipe_y))
+    return top_pipe, bottom_pipe
+
+
+def pipe_animation():
+    global game_over, score_time
+    for pipe in pipes:
+        if pipe.top < 0:
+            flipped_pipe = pygame.transform.flip(pipe_img, False, True)
+            screen.blit(flipped_pipe, pipe)
+        else:
+            screen.blit(pipe_img, pipe)
+
+        pipe.centerx -= 3
+        if pipe.right < 0:
+            pipes.remove(pipe)
+
+        if bird_rect.colliderect(pipe):
+            game_over = True
+
+
 start_screen()
 running = True
 while running:
